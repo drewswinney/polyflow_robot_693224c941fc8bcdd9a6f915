@@ -192,7 +192,18 @@
     } // lib.optionalAttrs (isAmentPythonPkg name) {
       # Force Python packages down the ament_python path so setup.py runs.
       buildType = "ament_python";
-    })) rosPackageDirs;
+    } // lib.optionalAttrs (isAmentPythonPkg name) {
+      # Provide the libexec shim ROS expects for ament_python packages.
+      postInstall = ''
+        mkdir -p "$out/lib/${name}"
+        if [ -d "$out/bin" ]; then
+          for exe in "$out/bin"/*; do
+            [ -f "$exe" ] || continue
+            ln -sf "$exe" "$out/lib/${name}/$(basename "$exe")"
+          done
+        fi
+      '';
+    }))) rosPackageDirs;
     
     rosWorkspace = rosPkgs.buildROSWorkspace {
       name = "polyflow-ros-workspace";
