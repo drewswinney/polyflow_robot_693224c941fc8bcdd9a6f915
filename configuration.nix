@@ -128,7 +128,7 @@ let
         pkg=$(basename "$(dirname "$launch_file")")
         base=$(basename "$launch_file")
         launch_entries+=("$pkg:$base")
-      done < <(find "${rosWorkspace}/share" -maxdepth 3 -type f -name '*.launch.py' -print | sort)
+      done < <(find -L "${rosWorkspace}/share" -maxdepth 3 -type f -name '*.launch.py' -print | sort)
 
       if [ "''${#launch_entries[@]}" -eq 0 ]; then
         echo "[workspace-launch] No launch files found under ${rosWorkspace}/share" >&2
