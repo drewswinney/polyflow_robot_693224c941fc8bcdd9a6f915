@@ -1,6 +1,6 @@
 import json
 from launch import LaunchDescription
-from launch.actions import ExecuteProcess
+from launch_ros.actions import Node
 
 def generate_launch_description():
     parameters = json.loads('{"joint":"6932256d41fc8bcdd9a6f938","control_mode":"position","limit.lower_position":0,"limit.upper_position":360,"limit.position_step":1,"limit.max_effort":10,"limit.effort_step":null,"limit.max_velocity":35,"limit.velocity_step":0}')
