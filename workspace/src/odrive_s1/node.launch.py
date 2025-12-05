@@ -15,12 +15,12 @@ def generate_launch_description():
         "POLYFLOW_OUTBOUND_CONNECTIONS": json.dumps(outbound_connections),
     }
 
-    return LaunchDescription(
-        [
-            ExecuteProcess(
-                cmd=["python3", "workspace/src/odrive_s1/odrive_s1/node.py"],
-                additional_env=env,
-                output="screen",
-            )
-        ]
-    )
+    return LaunchDescription([
+        Node(
+            package="odrive_s1",
+            executable="odrive_s1_node",
+            name="odrive_s1_node",
+            output="screen",
+            env=env,
+        )
+    ])
