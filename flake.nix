@@ -203,7 +203,7 @@
           done
         fi
       '';
-    }))) rosPackageDirs;
+    })) rosPackageDirs;
     
     rosWorkspace = rosPkgs.buildROSWorkspace {
       name = "polyflow-ros-workspace";
